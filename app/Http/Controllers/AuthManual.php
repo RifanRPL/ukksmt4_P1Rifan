@@ -37,7 +37,8 @@ class AuthManual extends Controller
             }
         }
 
-        return back();
+        
+        return back()->with('error', 'Incorrect Email or Password!');
     }
 
     public function logout(Request $request)

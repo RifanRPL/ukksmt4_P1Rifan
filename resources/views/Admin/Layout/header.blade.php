@@ -164,35 +164,28 @@
                             <li class="menu-title" data-key="t-applications">Crud</li>
 
                             <li>
-                                <a href="/user">
+                                <a href="{{ route('user.index') }}">
                                     <i class="bx bx-user-circle icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-calendar">User</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/kategori">
+                                <a href="{{ route('kategori.index') }}">
                                     <i class="bx bx-file icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-todo">Kategori</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/alat">
+                                <a href="{{ route('alat.index') }}">
                                     <i class="bx bx-cube icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-filemanager">Alat dan Unit</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/banding">
-                                    <i class="bx bx-chat icon nav-icon"></i>
-                                    <span class="menu-item" data-key="t-chat">Banding</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="/log">
+                                <a href="{{ route('log.index') }}">
                                     <i class="bx bx-file-find icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-horizontal">Log Aktifitas</span>
                                 </a>

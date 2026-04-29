@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //buat validasi
+
         $validatedData=$request->validate([
             'nik' => 'required',
             'nama' => 'required|max:255',
@@ -37,16 +37,15 @@ class UserController extends Controller
             'alamat' => 'required|max:255',
             'tanggal_lahir' => 'required', 
             'email' => 'required|max:255', 
-            'password' => 'required|min:8|max:100', 
+            'password' => 'required|max:100', 
             'role' => 'required|in:admin,petugas,peminjam', 
             'credit_score' => 'required', 
             'ban_status' => 'required', 
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
-        //buat simpan data
+
         User::create($validatedData);
 
-        //redirect ke index buku
         return redirect()->route('user.index');
     }
 
@@ -71,7 +70,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+
+        $validatedData=$request->validate([
+            'nik' => 'required',
+            'nama' => 'required|max:255',
+            'no_hp' => 'required',
+            'alamat' => 'required|max:255',
+            'tanggal_lahir' => 'required', 
+            'email' => 'required|max:255', 
+            'role' => 'required|in:admin,petugas,peminjam', 
+            'credit_score' => 'required', 
+            'ban_status' => 'required', 
+        ]);
+
+        $user->update($validatedData);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -79,6 +93,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('user.index');
     }
 }

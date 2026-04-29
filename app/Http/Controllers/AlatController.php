@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alat;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class AlatController extends Controller
@@ -12,7 +13,8 @@ class AlatController extends Controller
      */
     public function index()
     {
-        return view('admin.alat.tampil');
+        $allAlat=Alat::all();
+        return view('admin.alat.tampil', compact('allAlat'));
     }
 
     /**
@@ -20,7 +22,8 @@ class AlatController extends Controller
      */
     public function create()
     {
-        return view('admin.alat.create');
+        $allKategori=Kategori::all();
+        return view('admin.alat.create', compact('allKategori'));
     }
 
     /**
@@ -28,7 +31,27 @@ class AlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData=$request->validate([
+            'nama' => 'required|max:255',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'min_credit_score' => 'required|max:100',
+            'deskripsi' => 'required|max:255',
+            'status' => 'required',
+            'foto' => 'image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+        
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $namaFile = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/images/alats'), $namaFile);
+
+            $validatedData['foto'] = $namaFile;
+        }
+
+        Alat::create($validatedData);
+
+        return redirect()->route('alat.index');
     }
 
     /**
@@ -36,7 +59,7 @@ class AlatController extends Controller
      */
     public function show(Alat $alat)
     {
-        //
+        return view('admin.alat.detail', compact('alat'));
     }
 
     /**
@@ -44,7 +67,8 @@ class AlatController extends Controller
      */
     public function edit(Alat $alat)
     {
-        return view('admin.alat.edit');
+        $allKategori=Kategori::all();
+        return view('admin.alat.edit', compact('alat', 'allKategori'));
     }
 
     /**
@@ -52,7 +76,32 @@ class AlatController extends Controller
      */
     public function update(Request $request, Alat $alat)
     {
-        //
+        $validatedData=$request->validate([
+            'nama' => 'required|max:255',
+            'kategori_id' => 'required',
+            'harga' => 'required',
+            'min_credit_score' => 'required|max:100',
+            'deskripsi' => 'required|max:255',
+            'status' => 'required',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+        
+        if ($request->hasFile('foto')) {
+            //Hapus Foto Lama
+            if ($alat->foto && file_exists(public_path('assets/images/alats/'.$alat->foto))) {
+            unlink(public_path('assets/images/alats/'.$alat->foto));
+        }
+
+            $file = $request->file('foto');
+            $namaFile = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('assets/images/alats'), $namaFile);
+
+            $validatedData['foto'] = $namaFile;
+        }
+
+        $alat->update($validatedData);
+
+        return redirect()->route('alat.show', $alat->id);
     }
 
     /**
@@ -60,6 +109,10 @@ class AlatController extends Controller
      */
     public function destroy(Alat $alat)
     {
-        //
+        if ($alat->foto && file_exists(public_path('assets/images/alats/'.$alat->foto))) {
+            unlink(public_path('assets/images/alats/'.$alat->foto));
+        }
+        $alat->delete();
+        return redirect()->route('alat.index');
     }
 }

@@ -6,15 +6,17 @@
                 <h4 class="card-title">Edit</h4>
             </div>
             <div class="card-body">
-            <form action="">
+            <form action="{{ route('kategori.update', $kategori->id) }}" method="post">
+            @csrf
+            @method('PUT')
                 <div class="mb-3 row">
                     <label for="example-text-input" class="col-md-2 col-form-label">Nama</label>
                     <div class="col-md-10">
-                        <input class="form-control" type="text" id="example-text-input">
+                        <input class="form-control" type="text" name="nama" value="{{ $kategori->nama }}" id="example-text-input">
                     </div>
                 </div>
                 <button class="btn btn-success" type="submit">Selesai</button>
-                <a class="btn btn-danger" href="{{ route('kategori.index') }}">Batal</a>
+                <a class="btn btn-primary" href="{{ route('kategori.index') }}">Batal</a>
             </form>
             </div>
         </div>

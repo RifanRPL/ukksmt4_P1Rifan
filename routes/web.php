@@ -15,19 +15,8 @@ Route::get('/', function () {
 });
 
 Route::resource('user', UserController::class);
-
-Route::get('/kategori/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
 Route::resource('kategori', KategoriController::class);
-
-Route::get('/alat/edit', [AlatController::class, 'edit'])->name('alat.edit');
 Route::resource('alat', AlatController::class);
-
-Route::get('/alat/unit/edit', [UnitAlatController::class, 'edit'])->name('unit.edit');
-Route::resource('unit', UnitAlatController::class);
-
-Route::get('/banding/detail', [BandingController::class, 'detail'])->name('banding.detail');
-Route::get('/banding/edit', [BandingController::class, 'edit'])->name('banding.edit');
-Route::resource('banding', BandingController::class);
 
 Route::resource('log', LogController::class);
 

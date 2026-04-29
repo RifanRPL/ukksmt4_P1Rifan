@@ -12,36 +12,27 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Kategori</th>
-                                <th>Nama</th>
-                                <th>Tipe Item</th>
-                                <th>Harga</th>
-                                <th>Minimal Credit Score</th>
-                                <th>Deskripsi</th>
                                 <th>Foto</th>
-                                <th>Created_At</th>
-                                <th>Updated_At</th>
+                                <th>Nama</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($allAlat as $key => $alat)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Device</td>
-                                <td>Laptop</td>
-                                <td>Elektronik</td>
-                                <td>1000000</td>
-                                <td>80</td>
-                                <td>Ini Laptop</td>
-                                <td>*foto</td>
-                                <td>Jam segitulah</td>
-                                <td>Jam segitulah</td>
+                                <th scope="row">{{ $alat->id }}</th>
+                                <td><img class="w-25" src="{{ asset('assets/images/alats/'.$alat->foto) }}" alt=""></td>
+                                <td>{{ $alat->nama }}</td>
                                 <td>
-                                    <a class="btn btn-warning col-9" href="{{ route('alat.edit') }}">Edit</a>
-                                    <a class="btn btn-danger col-9 my-1" href="">Hapus</a>
-                                    <a class="btn btn-primary col-9" href="/unit">Lihat Unit</a>
+                                    @if($alat->status == '0') Tidak @endif
+                                    @if($alat->status == '1') Ready @endif
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="{{ route('alat.show', $alat->id) }}">Detail</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

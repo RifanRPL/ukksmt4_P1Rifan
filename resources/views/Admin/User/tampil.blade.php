@@ -31,12 +31,15 @@
                         <tbody>
                             @foreach($allUser as $key => $user)
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">{{ $user->id }}</th>
                                 <td>{{ $user->nama }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
                                 <td>{{ $user->credit_score }}</td>
-                                <td>{{ $user->ban_status }}</td>
+                                <td>
+                                    @if($user->ban_status == '0') Tidak @endif
+                                    @if($user->ban_status == '1') Ya @endif
+                                </td>
                                 <td><a class="btn btn-primary" href="{{ route('user.show', $user->id) }}">Detail</a></td>
                             </tr>
                             @endforeach

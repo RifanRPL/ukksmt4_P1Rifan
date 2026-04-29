@@ -61,7 +61,10 @@
 
                 <tr>
                     <th>Ban Status</th>
-                    <td>{{ $user->ban_status }}</td>
+                    <td>
+                        @if($user->ban_status == '0') Tidak @endif
+                        @if($user->ban_status == '1') Ya @endif
+                    </td>
                 </tr>
 
                 <tr>
@@ -79,9 +82,13 @@
             <a href="{{ route('user.edit', $user->id) }}" class='btn btn-warning mt-3'>
                 Edit
             </a>
-            <button class='btn btn-danger mt-3'>
+            <form action="{{ route('user.destroy', $user->id) }}" method="post">
+                @csrf
+                @method('DELETE')
+            <button class='btn btn-danger mt-3' type="submit">
                 Hapus
             </button>
+            </form>
         </div>
     </div>
 </div>

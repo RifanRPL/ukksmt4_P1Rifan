@@ -17,11 +17,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($allKategori as $key => $k)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Device</td>
-                                <td><a class="btn btn-warning m-1" href="{{ route('kategori.edit', 1) }}">Edit</a><a class="btn btn-danger" href="">Hapus</a></td>
+                                <th scope="row">{{ $k->id }}</th>
+                                <td>{{ $k->nama }}</td>
+                                <td><a class="btn btn-warning m-1" href="{{ route('kategori.edit', $k->id) }}">Edit</a>
+                                <form action="{{ route('kategori.destroy', $k->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">Hapus</button>
+                                </form>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

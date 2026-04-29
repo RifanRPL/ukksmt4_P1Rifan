@@ -11,8 +11,9 @@ class KategoriController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('admin.kategori.tampil');
+    {   
+        $allKategori=Kategori::all();
+        return view('admin.kategori.tampil', compact('allKategori'));
     }
 
     /**
@@ -28,7 +29,13 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData=$request->validate([
+            'nama'=>'required|max:255',
+        ]);
+
+        Kategori::create($validatedData);
+
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -44,7 +51,7 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        return view('admin.kategori.edit');
+        return view('admin.kategori.edit', compact('kategori'));
     }
 
     /**
@@ -52,7 +59,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|max:255',
+        ]);
+        
+        $kategori->update($validatedData);
+
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -60,6 +73,8 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        $kategori->delete();
+        
+        return redirect()->route('kategori.index');
     }
 }
