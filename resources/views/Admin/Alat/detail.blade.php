@@ -30,11 +30,6 @@
                 </tr>
 
                 <tr>
-                    <th>Minimal Credit Score</th>
-                    <td>{{ $alat->min_credit_score }}</td>
-                </tr>
-
-                <tr>
                     <th>Deskripsi</th>
                     <td>{{ $alat->deskripsi }}</td>
                 </tr>

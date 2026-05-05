@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('kategori_id')->constrained()->onUpdate('cascade')->onDelete('restrict');
             $table->string('nama',255);
             $table->integer('harga');
-            $table->integer('min_credit_score');
             $table->text('deskripsi');
             $table->tinyInteger('status');
             $table->string('foto',255);

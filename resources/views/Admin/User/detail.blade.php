@@ -53,17 +53,12 @@
                     <th>Role</th>
                     <td>{{ $user->role }}</td>
                 </tr>
-                
-                <tr>
-                    <th>Credit Score</th>
-                    <td>{{ $user->credit_score }}</td>
-                </tr>
 
                 <tr>
-                    <th>Ban Status</th>
+                    <th>Dibatasi</th>
                     <td>
-                        @if($user->ban_status == '0') Tidak @endif
-                        @if($user->ban_status == '1') Ya @endif
+                        @if($user->dibatasi == '0') Tidak @endif
+                        @if($user->dibatasi == '1') Ya @endif
                     </td>
                 </tr>
 

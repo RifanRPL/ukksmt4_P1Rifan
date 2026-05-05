@@ -61,8 +61,7 @@
                         </select>
                     </div>
                 </div>
-                <input class="form-control" name="credit_score" type="hidden" value="100">
-                <input class="form-control" name="ban_status" type="hidden" value="0">  
+                <input class="form-control" name="dibatasi" type="hidden" value="0">  
                 <button class="btn btn-success" type="submit">Selesai</button>
                 <a class="btn btn-primary" href="{{ route('user.index') }}">Batal</a>
             </form>

@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('peminjam_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
             $table->foreignId('alat_id')->constrained()->onUpdate('cascade')->onDelete('restrict');
-            $table->foreignId('petugas_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('petugas_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict')->nullable();
             $table->enum('status',['disetujui', 'pending', 'ditolak']);
             $table->date('tanggal_peminjaman');
-            $table->date('batas_waktu');
+            $table->date('batas_waktu')->nullable();
             $table->string('tujuan');
-            $table->text('catatan');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }

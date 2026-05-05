@@ -45,8 +45,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email', 
             'password' => 'required|max:100', 
             'role' => 'required|in:admin,petugas,peminjam', 
-            'credit_score' => 'required|integer|min:0',
-            'ban_status' => 'required|in:0,1',
+            'dibatasi' => 'required|in:0,1',
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -85,8 +84,7 @@ class UserController extends Controller
             'tanggal_lahir' => 'required', 
             'email' => 'required|max:255', 
             'role' => 'required|in:admin,petugas,peminjam', 
-            'credit_score' => 'required', 
-            'ban_status' => 'required', 
+            'dibatasi' => 'required', 
         ]);
 
         $user->update($validatedData);

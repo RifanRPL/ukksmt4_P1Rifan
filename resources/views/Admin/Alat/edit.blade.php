@@ -39,12 +39,6 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="example-text-input" class="col-md-2 col-form-label">Minimal Credit Score</label>
-                    <div class="col-md-10">
-                        <input class="form-control" value="{{ $alat->min_credit_score }}" name="min_credit_score" type="number" id="example-text-input">
-                    </div>
-                </div>
-                <div class="mb-3 row">
                     <label for="example-text-input" class="col-md-2 col-form-label">Deskripsi</label>
                     <div class="col-md-10">
                         <input class="form-control" value="{{ $alat->deskripsi }}" name="deskripsi" type="text" id="example-text-input">

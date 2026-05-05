@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('petugas_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');    
             $table->date('tanggal_pengembalian');
             $table->enum('kondisi',['rusak_ringan', 'rusak_sedang', 'rusak_berat', 'baik', 'hilang']);
-            $table->text('catatan');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }

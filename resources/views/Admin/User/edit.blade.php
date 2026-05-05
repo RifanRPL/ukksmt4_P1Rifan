@@ -56,17 +56,11 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="example-text-input" class="col-md-2 col-form-label">Credit Score</label>
+                    <label class="col-md-2 col-form-label">Status Dibatasi</label>
                     <div class="col-md-10">
-                        <input class="form-control" name="credit_score" value="{{ $user->credit_score }}" type="number" id="example-text-input">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-md-2 col-form-label">Ban Status</label>
-                    <div class="col-md-10">
-                        <select class="form-select" name="ban_status">
-                            <option value="1" @if($user->ban_status == '1') selected @endif>Ya</option>
-                            <option value="0" @if($user->ban_status == '0') selected @endif>Tidak</option>
+                        <select class="form-select" name="dibatasi">
+                            <option value="1" @if($user->dibatasi == '1') selected @endif>Ya</option>
+                            <option value="0" @if($user->dibatasi == '0') selected @endif>Tidak</option>
                         </select>
                     </div>
                 </div>

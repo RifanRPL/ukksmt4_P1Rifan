@@ -26,7 +26,6 @@
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Credit Score</th>
                                 <th>Ban Status</th>
                                 <th>Aksi</th>
                             </tr>
@@ -38,10 +37,9 @@
                                 <td>{{ $user->nama }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->role }}</td>
-                                <td>{{ $user->credit_score }}</td>
                                 <td>
-                                    @if($user->ban_status == '0') Tidak @endif
-                                    @if($user->ban_status == '1') Ya @endif
+                                    @if($user->dibatasi == '0') Tidak @endif
+                                    @if($user->dibatasi == '1') Ya @endif
                                 </td>
                                 <td><a class="btn btn-primary" href="{{ route('user.show', $user->id) }}">Detail</a></td>
                             </tr>

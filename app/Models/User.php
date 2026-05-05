@@ -28,8 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'credit_score',
-        'ban_status'
+        'dibatasi'
     ];
 
     /**
