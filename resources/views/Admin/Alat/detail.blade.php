@@ -16,7 +16,7 @@
 
                 <tr>
                     <th>Kategori</th>
-                    <td>{{ $alat->kategori_id }}</td>
+                    <td>{{ $alat->kategori->nama }}</td>
                 </tr>
 
                 <tr>

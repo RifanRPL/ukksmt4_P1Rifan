@@ -11,9 +11,15 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $allUser=User::all();
+        $query = User::query();
+
+        if ($request->role) {
+            $query->where('role', $request->role);
+        }
+
+        $allUser = $query->get();
         return view('admin.user.tampil', compact('allUser'));
     }
     /**
@@ -36,11 +42,11 @@ class UserController extends Controller
             'no_hp' => 'required',
             'alamat' => 'required|max:255',
             'tanggal_lahir' => 'required', 
-            'email' => 'required|max:255', 
+            'email' => 'required|email|unique:users,email', 
             'password' => 'required|max:100', 
             'role' => 'required|in:admin,petugas,peminjam', 
-            'credit_score' => 'required', 
-            'ban_status' => 'required', 
+            'credit_score' => 'required|integer|min:0',
+            'ban_status' => 'required|in:0,1',
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
 

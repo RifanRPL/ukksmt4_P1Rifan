@@ -17,6 +17,12 @@ class AlatController extends Controller
         return view('admin.alat.tampil', compact('allAlat'));
     }
 
+    public function list()
+    {
+        $allAlat=Alat::all();
+        return view('peminjam.alat.list', compact('allAlat'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -60,6 +66,11 @@ class AlatController extends Controller
     public function show(Alat $alat)
     {
         return view('admin.alat.detail', compact('alat'));
+    }
+    public function detail($id)
+    {
+        $alat = Alat::findOrFail($id);
+        return view('peminjam.alat.detail', compact('alat'));
     }
 
     /**

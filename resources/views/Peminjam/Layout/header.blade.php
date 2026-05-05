@@ -208,9 +208,9 @@
                         </button>
 
                         <!-- start page title -->
-                        <div class="page-title-box align-self-center d-none d-md-block">
+                        <!-- <div class="page-title-box align-self-center d-none d-md-block">
                             <h4 class="page-title mb-0">Hi, Welcome Back!</h4>
-                        </div>
+                        </div> -->
                         <!-- end page title -->
 
                     </div>
@@ -270,7 +270,7 @@
                             <div class="collapse navbar-collapse" id="topnav-menu-content">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="index.html">
+                                        <a class="nav-link" href="{{ route('alat.list') }}">
                                             <i class="bx bx-cube icon nav-icon"></i>
                                             <span data-key="t-dashboards">Alat</span>
                                         </a>

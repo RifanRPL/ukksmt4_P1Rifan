@@ -13,7 +13,6 @@
                                 <th>ID</th>
                                 <th>Pengaju</th>
                                 <th>Alat</th>
-                                <th>Code Unit</th>
                                 <th>Status</th>
                                 <th>Created_At</th>
                                 <th>Updated_At</th>
@@ -21,18 +20,27 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($allPeminjaman as $key => $peminjaman)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Gusti</td>
-                                <td>Laptop</td>
-                                <td>L098</td>
-                                <td>Belum diapa-apain</td>
-                                <td>Jam segitulah</td>
-                                <td>Jam segitulah</td>
+                                <th scope="row">{{ $peminjaman->id }}</th>
+                                <td>{{ $peminjaman->peminjam->nama }}</td>
+                                <td>{{ $peminjaman->alat->nama }}</td>
+                                <td> @if ($peminjaman->pengembalian)
+                                    <span class="badge bg-success font-size-12 ms-2">Dikembalikan</span>
+                                    @elseif ($peminjaman->status == 'pending')
+                                    <span class="badge bg-secondary font-size-12 ms-2">Pending</span>
+                                    @elseif ($peminjaman->status == 'disetujui')
+                                    <span class="badge bg-primary font-size-12 ms-2">Disetujui</span>
+                                    @else
+                                    <span class="badge bg-danger font-size-12 ms-2">Ditolak</span>
+                                    @endif
+                                <td>{{ $peminjaman->created_at }}</td>
+                                <td>{{ $peminjaman->updated_at }}</td>
                                 <td>
-                                    <a class="btn btn-primary col-9" href="{{ route('peminjaman.detail') }}">Detail</a>
+                                    <a class="btn btn-primary col-9" href="{{ route('peminjaman.show', $peminjaman->id) }}">Detail</a>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

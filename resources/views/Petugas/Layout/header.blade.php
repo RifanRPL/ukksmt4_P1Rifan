@@ -164,21 +164,21 @@
                             <li class="menu-title" data-key="t-applications">Management</li>
 
                             <li>
-                                <a href="/peminjaman">
+                                <a href="{{ route('peminjaman.index') }}">
                                     <i class="bx bx-cube icon icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-calendar">Peminjaman</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/pengembalian">
+                                <a href="{{ route('pengembalian.index') }}">
                                     <i class="bx bx-package icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-todo">Pengembalian</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/pelanggaran">
+                                <a href="{{ route('pelanggaran.index') }}">
                                     <i class="bx bx bx-x-circle icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-filemanager">Pelanggaran</span>
                                 </a>

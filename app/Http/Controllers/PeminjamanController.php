@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alat;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
@@ -12,18 +13,17 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        return view('petugas.peminjaman.tampil');
+        $allPeminjaman=Peminjaman::all();
+        return view('petugas.peminjaman.tampil', compact('allPeminjaman'));
     }
-    public function detail()
-    {
-        return view('petugas.peminjaman.detail');
-    }
+
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        return view('petugas.peminjaman.create');
+        $alat = Alat::findOrFail($id);
+        return view('peminjam.alat.createPeminjaman', compact('alat'));
     }
 
     /**
@@ -31,7 +31,17 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData=$request->validate([
+            'peminjam_id' => 'required',
+            'alat_id' => 'required',
+            'status' => 'required|in:disetujui,pending,ditolak',
+            'tanggal_peminjaman' => 'required',
+            'tujuan' => 'required|max:255', 
+        ]);
+
+        Peminjaman::create($validatedData);
+
+        return redirect()->route('alat.list');
     }
 
     /**
@@ -39,7 +49,7 @@ class PeminjamanController extends Controller
      */
     public function show(Peminjaman $peminjaman)
     {
-        //
+        return view('petugas.peminjaman.detail', compact('peminjaman'));
     }
 
     /**
@@ -47,7 +57,7 @@ class PeminjamanController extends Controller
      */
     public function edit(Peminjaman $peminjaman)
     {
-        return view('petugas.peminjaman.edit');
+        return view('petugas.peminjaman.edit', compact('peminjaman'));
     }
 
     /**
@@ -55,7 +65,16 @@ class PeminjamanController extends Controller
      */
     public function update(Request $request, Peminjaman $peminjaman)
     {
-        //
+        $validatedData=$request->validate([
+            'petugas_id' => 'required',
+            'status' => 'required|in:disetujui,pending,ditolak',
+            'batas_waktu' => 'required',
+            'catatan' => 'required|max:255', 
+        ]);
+
+        $peminjaman->update($validatedData);
+
+        return redirect()->route('peminjaman.show', $peminjaman->id);
     }
 
     /**

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama',255);
             $table->integer('harga');
             $table->integer('min_credit_score');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
             $table->tinyInteger('status');
             $table->string('foto',255);
             $table->timestamps();

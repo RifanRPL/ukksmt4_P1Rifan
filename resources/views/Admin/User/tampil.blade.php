@@ -4,14 +4,17 @@
             <div class="card-header">
                 <h4 class="card-title">User</h4>
                 <a class="btn btn-primary" href="{{ route('user.create') }}">Tambah Akun</a>
+                <form method="GET" action="{{ route('user.index') }}">
                     <div class="col-4">
                         <label class="col-form-label">Role</label>
-                        <select class="form-select">
-                            <option>Peminjam</option>
-                            <option>Petugas</option>
-                            <option>Admin</option>
+                        <select class="form-select" name="role" onchange="this.form.submit()">
+                            <option value="">Semua</option>
+                            <option value="peminjam" @if(request('role') == 'peminjam') selected @endif>Peminjam</option>
+                            <option value="petugas" @if(request('role') == 'petugas') selected @endif>Petugas</option>
+                            <option value="admin" @if(request('role') == 'admin') selected @endif>Admin</option>
                         </select>
                     </div>
+                </form>
             </div>
             <div class="card-body">  
                 <div class="table-responsive">

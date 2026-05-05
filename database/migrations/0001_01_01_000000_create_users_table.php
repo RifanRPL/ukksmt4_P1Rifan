@@ -22,8 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role',['admin', 'peminjam', 'petugas']);
-            $table->integer('credit_score');
-            $table->tinyInteger('ban_status');
+            $table->tinyInteger('dibatasi');
             $table->rememberToken();
             $table->timestamps();
         });

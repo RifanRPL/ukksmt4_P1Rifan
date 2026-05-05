@@ -180,7 +180,7 @@
                             <li>
                                 <a href="{{ route('alat.index') }}">
                                     <i class="bx bx-cube icon nav-icon"></i>
-                                    <span class="menu-item" data-key="t-filemanager">Alat dan Unit</span>
+                                    <span class="menu-item" data-key="t-filemanager">Alat</span>
                                 </a>
                             </li>
 
