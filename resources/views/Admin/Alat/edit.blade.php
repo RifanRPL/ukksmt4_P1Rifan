@@ -62,6 +62,19 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="mb-3 row">
+                    <label class="col-md-2 col-form-label">Kondisi</label>
+                    <div class="col-md-10">
+                        <select class="form-select" name="kondisi">
+                            <option value="baik" @if($alat->kondisi == 'baik') selected @endif>Baik</option>
+                            <option value="rusak_ringan" @if($alat->kondisi == 'rusak_ringan') selected @endif>Rusak Ringan</option>
+                            <option value="rusak_sedang" @if($alat->kondisi == 'rusak_sedang') selected @endif>Rusak Sedang</option>
+                            <option value="rusak_berat" @if($alat->kondisi == 'rusak_berat') selected @endif>Rusak Berat</option>
+                            <option value="hilang" @if($alat->kondisi == 'hilang') selected @endif>Hilang</option>
+                        </select>
+                    </div>
+                </div>
                 <button class="btn btn-success" type="submit">Selesai</button>
                 <a class="btn btn-primary" href="{{ route('alat.show', $alat->id) }}">Batal</a>
             </form>

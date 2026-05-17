@@ -35,11 +35,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <div class="mt-3">
-                                            <h5 class="font-size-14">Minimal Credit Score :</h5>
+                                            <h5 class="font-size-14">Ko :</h5>
                                                 <p class="mb-1 text-truncate">{{ $alat->min_credit_score }}</p>
-                                        </div>
+                                        </div> -->
                                         <!-- <div class="mt-3">
                                             <h5 class="font-size-14">Delivery location :</h5>
 
@@ -50,17 +50,24 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                    </div>
-                                </div>
+                                    <!-- </div>
+                                </div> -->
 
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-8">
                                         <div class="row text-center mt-4 pt-1">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 <div class="d-grid">
-                                                    <a href="{{ route('peminjaman.create', $alat->id)}}" class="btn btn-primary waves-effect  mt-2 waves-light">
+                                                    @if ($user == 0)
+                                                    <a href="{{ route('peminjamanp.create', $alat->id)}}" class="btn btn-primary waves-effect  mt-2 waves-light">
                                                         <i class="bx bx-shopping-bag me-2"></i>Ajukan Pinjaman
                                                     </a>
+                                                    @else
+                                                    <a href="" class="btn btn-danger waves-effect  mt-2 waves-light">
+                                                        <i class="bx bx-shopping-bag me-2"></i>Tidak Dapat Mengajukan
+                                                    </a>
+                                                    <p>Sedang Dalam Status DIbatasi, Tolong Lunas Kan Denda Terlebih Dahulu</p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

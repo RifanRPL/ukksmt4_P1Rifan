@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('restrict');
+            $table->string('aksi');
+            $table->string('bagian');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

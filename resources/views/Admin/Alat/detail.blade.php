@@ -43,6 +43,23 @@
                 </tr>
 
                 <tr>
+                    <th>Kondisi</th>
+                    <td>
+                        @if ($alat->kondisi == 'rusak_ringan')
+                        <span class="badge bg-primary font-size-12 ms-2">Rusak Ringan</span>
+                        @elseif ($alat->kondisi == 'rusak_sedang')
+                        <span class="badge bg-warning font-size-12 ms-2">Rusak Sedang</span>
+                        @elseif ($alat->kondisi == 'rusak_berat')
+                        <span class="badge bg-danger font-size-12 ms-2">Rusak Berat</span>
+                        @elseif ($alat->kondisi == 'baik')
+                        <span class="badge bg-success font-size-12 ms-2">Baik</span>
+                        @else
+                        <span class="badge bg-dark font-size-12 ms-2">Hilang</span>
+                        @endif
+                    </td>
+                </tr>
+
+                <tr>
                     <th>Foto</th>
                     <td><img class="w-25" src="{{ asset('assets/images/alats/'.$alat->foto) }}" alt=""></td>
                 </tr>

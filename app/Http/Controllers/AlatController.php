@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Alat;
 use App\Models\Kategori;
+use App\Models\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AlatController extends Controller
 {
@@ -19,7 +21,7 @@ class AlatController extends Controller
 
     public function list()
     {
-        $allAlat=Alat::all();
+        $allAlat = Alat::where('status', 1)->get();
         return view('peminjam.alat.list', compact('allAlat'));
     }
 
@@ -42,6 +44,7 @@ class AlatController extends Controller
             'kategori_id' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required|max:255',
+            'kondisi' => 'required|in:rusak_ringan,rusak_sedang,rusak_berat,baik,hilang',
             'status' => 'required',
             'foto' => 'image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -54,6 +57,13 @@ class AlatController extends Controller
             $validatedData['foto'] = $namaFile;
         }
 
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Tambah',
+            'bagian' => 'Alat',
+            'created_at' => now(),
+        ]);
+        
         Alat::create($validatedData);
 
         return redirect()->route('alat.index');
@@ -68,8 +78,9 @@ class AlatController extends Controller
     }
     public function detail($id)
     {
+        $user = Auth::user()->dibatasi;
         $alat = Alat::findOrFail($id);
-        return view('peminjam.alat.detail', compact('alat'));
+        return view('peminjam.alat.detail', compact('alat','user'));
     }
 
     /**
@@ -91,6 +102,7 @@ class AlatController extends Controller
             'kategori_id' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required|max:255',
+            'kondisi' => 'required|in:rusak_ringan,rusak_sedang,rusak_berat,baik,hilang',
             'status' => 'required',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -108,6 +120,13 @@ class AlatController extends Controller
             $validatedData['foto'] = $namaFile;
         }
 
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Edit',
+            'bagian' => 'Alat',
+            'created_at' => now(),
+        ]);
+
         $alat->update($validatedData);
 
         return redirect()->route('alat.show', $alat->id);
@@ -121,6 +140,14 @@ class AlatController extends Controller
         if ($alat->foto && file_exists(public_path('assets/images/alats/'.$alat->foto))) {
             unlink(public_path('assets/images/alats/'.$alat->foto));
         }
+
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Hapus',
+            'bagian' => 'Alat',
+            'created_at' => now(),
+        ]);
+
         $alat->delete();
         return redirect()->route('alat.index');
     }

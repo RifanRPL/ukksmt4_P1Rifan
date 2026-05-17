@@ -61,4 +61,8 @@ class User extends Authenticatable
     public function pengembalian(): HasMany{
         return $this->hasMany(Pengembalian::class);
     }
+
+    public function log(): HasMany{
+        return $this->hasMany(Log::class);
+    }
 }

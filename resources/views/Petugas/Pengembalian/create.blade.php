@@ -6,7 +6,7 @@
                 <h4 class="card-title">Tambah Data Pengembalian</h4>
             </div>
             <div class="card-body">
-            <form action="{{ route('pengembalian.store') }}" method="post">
+            <form action="{{ route('pengembalian.store', $peminjaman->alat_id) }}" method="post">
                 @csrf
                 <input type="hidden" name="petugas_id" value="{{ Auth::user()->id }}">
                 <input type="hidden" name="peminjaman_id" value="{{ $peminjaman->id }}">
@@ -17,10 +17,10 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label class="col-md-2 col-form-label">Kondisi</label>
+                    <label class="col-md-2 col-form-label">Kondisi alat</label>
                     <div class="col-md-10">
                         <select class="form-select" name="kondisi">
-                            <option value="">-- Ubah Status --</option>
+                            <option value="">-- Ubah Kondisi --</option>
                             <option value="rusak_ringan">Rusak Ringan</option>
                             <option value="rusak_sedang">Rusak Sedang</option>
                             <option value="rusak_berat">Rusak Berat</option>

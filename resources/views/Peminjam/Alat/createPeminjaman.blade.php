@@ -65,7 +65,7 @@
                                                     <tr>
                                                         <th scope="row"><img src="{{ asset('assets/images/alats/'.$alat->foto) }}" alt="product-img" title="product-img" class="avatar-md"></th>
                                                         <td>
-                                                            <h5 class="font-size-15 text-truncate"><a href="ecommerce-product-detail.html" class="text-body">{{ $alat->nama }}  {{Auth::user()->nama}}</a></h5>
+                                                            <h5 class="font-size-15 text-truncate"><a href="ecommerce-product-detail.html" class="text-body">{{ $alat->nama }}</a></h5>
                                                         </td>
                                                     </tr>
                                                 </tbody>

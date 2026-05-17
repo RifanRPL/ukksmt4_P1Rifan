@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alat;
+use App\Models\Log;
 use App\Models\Peminjaman;
 use App\Models\Pengembalian;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PengembalianController extends Controller
 {
@@ -29,7 +33,7 @@ class PengembalianController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Alat $alat)
     {
         $validatedData=$request->validate([
             'peminjaman_id' => 'required',
@@ -39,9 +43,39 @@ class PengembalianController extends Controller
             'catatan' => 'required', 
         ]);
 
-        Pengembalian::create($validatedData);
+        $validatedDataAlat=$request->validate([
+            'kondisi' => 'required|in:rusak_ringan,rusak_sedang,rusak_berat,baik,hilang',
+        ]);
 
-        return redirect()->route('pengembalian.index');
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Tambah',
+            'bagian' => 'Pengembalian',
+            'created_at' => now(),
+        ]);
+
+        $pengembalian = Pengembalian::create($validatedData);
+        if ($validatedDataAlat['kondisi'] == 'baik') {
+            $alat->update([
+                'kondisi' => 'baik',
+                'status' => 1,
+            ]);
+        } else {
+            $alat->update($validatedDataAlat);   
+        }
+
+        $peminjaman = Peminjaman::find($validatedData['peminjaman_id']);
+        $batas_waktu = Carbon::parse($peminjaman->batas_waktu);
+        $tanggal_pengembalian = Carbon::parse($validatedData['tanggal_pengembalian']);
+        $telat = $tanggal_pengembalian->gt($batas_waktu);
+
+        if ($validatedDataAlat['kondisi'] != 'baik' || $telat) {
+            return redirect()->route('pelanggaran.create', [
+                'id' => $pengembalian->id
+            ]);
+        } else {
+            return redirect()->route('pengembalian.index');
+        }
     }
 
     /**

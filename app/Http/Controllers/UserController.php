@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -49,6 +51,13 @@ class UserController extends Controller
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
 
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Tambah',
+            'bagian' => 'User',
+            'created_at' => now(),
+        ]);
+
         User::create($validatedData);
 
         return redirect()->route('user.index');
@@ -87,9 +96,16 @@ class UserController extends Controller
             'dibatasi' => 'required', 
         ]);
 
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Edit',
+            'bagian' => 'User',
+            'created_at' => now(),
+        ]);
+
         $user->update($validatedData);
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.show', $user->id);
     }
 
     /**
@@ -97,6 +113,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Hapus',
+            'bagian' => 'User',
+            'created_at' => now(),
+        ]);
+
         $user->delete();
         return redirect()->route('user.index');
     }

@@ -3,7 +3,13 @@
     <div class="col-lg-12">
                 <div class="invoice-title">
                     <h4 class="float-end font-size-15">Pengajuan Peminjaman
-                        @if ($peminjaman->pengembalian)
+                        @if ($peminjaman->pengembalian?->pelanggaran != null)
+                            @if ($peminjaman->pengembalian->pelanggaran->status == 0)
+                            <span class="badge bg-danger font-size-12 ms-2">Pelanggaran</span>
+                            @else
+                            <span class="badge bg-success font-size-12 ms-2">Lunas</span>
+                            @endif
+                        @elseif ($peminjaman->pengembalian)
                         <span class="badge bg-success font-size-12 ms-2">Dikembalikan</span>
                         @elseif ($peminjaman->status == 'pending')
                         <span class="badge bg-secondary font-size-12 ms-2">Pending</span>
@@ -33,6 +39,7 @@
                             <p class="mb-1">{{$peminjaman->peminjam->alamat}}</p>
                             <p class="mb-1">{{$peminjaman->peminjam->email}}</p>
                             <p>{{$peminjaman->peminjam->no_hp}}</p>
+                            <p>{{$peminjaman->tujuan}}</p>
                         </div>
 
                         <div class="text-muted">
@@ -55,6 +62,10 @@
                             <div class="mt-4">
                                 <h5 class="font-size-15 mb-1">Tanggal Pengajuan:</h5>
                                 <p>{{$peminjaman->created_at}}</p>
+                            </div>
+                            <div class="mt-4">
+                                <h5 class="font-size-15 mb-1">Tanggal Alat Akan Dipinjam:</h5>
+                                <p>{{$peminjaman->tanggal_peminjaman}}</p>
                             </div>
                             <div class="mt-4">
                                 <h5 class="font-size-15 mb-1">Batas Waktu:</h5>
@@ -109,10 +120,12 @@
                     <div class="d-print-none mt-4">
                         <div class="float-end">
                             <a href="javascript:window.print()" class="btn btn-secondary me-1"><i class="fa fa-print"></i></a>
-                            @if (!$peminjaman->pengembalian)
+                            @if (!$peminjaman->petugas_id==null)
+                                @if (!$peminjaman->pengembalian)
                                 <a href="{{ route('pengembalian.create', $peminjaman->id) }}" class="btn btn-primary">
                                     Tambah Pengembalian
                                 </a>
+                                @endif
                             @endif
                             <a href="{{ route('peminjaman.index') }}" class="btn btn-primary w-md">Kembali</a>
                             @if ($peminjaman->petugas_id==null)

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use App\Models\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KategoriController extends Controller
 {
@@ -31,6 +33,13 @@ class KategoriController extends Controller
     {
         $validatedData=$request->validate([
             'nama'=>'required|max:255',
+        ]);
+
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Tambah',
+            'bagian' => 'Kategori',
+            'created_at' => now(),
         ]);
 
         Kategori::create($validatedData);
@@ -63,6 +72,13 @@ class KategoriController extends Controller
             'nama' => 'required|max:255',
         ]);
         
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Edit',
+            'bagian' => 'Kategori',
+            'created_at' => now(),
+        ]);
+
         $kategori->update($validatedData);
 
         return redirect()->route('kategori.index');
@@ -73,6 +89,13 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Hapus',
+            'bagian' => 'Kategori',
+            'created_at' => now(),
+        ]);
+
         $kategori->delete();
         
         return redirect()->route('kategori.index');

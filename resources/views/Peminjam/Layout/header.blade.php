@@ -2,7 +2,7 @@
 <html lang="en">
 
     
-<!-- Mirrored from themesdesign.in/webadmin/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Mar 2026 22:44:14 GMT -->
+<!-- Mirrored from themesdesign.in/webadmin/layouts/{{route('peminjam.index')}} by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Mar 2026 22:44:14 GMT -->
 <head>
 
         <meta charset="utf-8" />
@@ -39,7 +39,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="{{route('peminjam.index')}}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                                 </span>
@@ -48,7 +48,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="{{route('peminjam.index')}}" class="logo logo-light">
                                 <span class="logo-lg">
                                     <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
                                 </span>
@@ -114,7 +114,7 @@
 
                 <!-- LOGO -->
                 <div class="navbar-brand-box">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="{{route('peminjam.index')}}" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                         </span>
@@ -123,7 +123,7 @@
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a href="{{route('peminjam.index')}}" class="logo logo-light">
                         <span class="logo-lg">
                             <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
                         </span>
@@ -184,7 +184,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="{{route('peminjam.index')}}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                                 </span>
@@ -193,7 +193,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="{{route('peminjam.index')}}" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/images/logo-light-sm.png') }}" alt="" height="26">
                                 </span>
@@ -291,9 +291,7 @@
                                                             <div class="row g-0">
                                                                 <div class="col-lg-4">
                                                                     <div>
-                                                                        <a href="ui-alerts.html" class="dropdown-item" data-key="t-alerts">Peminjaman</a>
-                                                                        <a href="ui-lightbox.html" class="dropdown-item" data-key="t-lightbox">Pengembalian</a>
-                                                                        <a href="ui-typography.html" class="dropdown-item" data-key="t-typography">Banding</a>
+                                                                        <a href="{{ route('peminjaman.riwayat') }}" class="dropdown-item" data-key="t-alerts">Peminjaman</a>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alat;
+use App\Models\Log;
 use App\Models\Peminjaman;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PeminjamanController extends Controller
 {
@@ -15,6 +18,12 @@ class PeminjamanController extends Controller
     {
         $allPeminjaman=Peminjaman::all();
         return view('petugas.peminjaman.tampil', compact('allPeminjaman'));
+    }
+
+    public function riwayat()
+    {
+        $allPeminjaman = Peminjaman::where('peminjam_id', Auth::id())->get();
+        return view('peminjam.riwayat.peminjaman', compact('allPeminjaman'));
     }
 
     /**
@@ -39,6 +48,13 @@ class PeminjamanController extends Controller
             'tujuan' => 'required|max:255', 
         ]);
 
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Tambah',
+            'bagian' => 'Peminjaman',
+            'created_at' => now(),
+        ]);
+
         Peminjaman::create($validatedData);
 
         return redirect()->route('alat.list');
@@ -50,6 +66,25 @@ class PeminjamanController extends Controller
     public function show(Peminjaman $peminjaman)
     {
         return view('petugas.peminjaman.detail', compact('peminjaman'));
+    }
+
+    public function detail(Peminjaman $peminjaman)
+    {   
+        $denda = 0;
+        if($peminjaman->pengembalian){
+        $batas_waktu = Carbon::parse($peminjaman->batas_waktu);
+        $tanggal_pengembalian = Carbon::parse($peminjaman->pengembalian->tanggal_pengembalian);
+        $hariTelat = 0;
+        if ($tanggal_pengembalian->gt($batas_waktu)) {
+            $hariTelat = $batas_waktu->diffInDays($tanggal_pengembalian);
+        }   
+
+        $denda_telat = $peminjaman->pengembalian->pelanggaran?->denda_telat / 100 * $peminjaman->alat->harga * $hariTelat;
+        $denda_kondisi = $peminjaman->pengembalian->pelanggaran?->denda / 100 * $peminjaman->alat->harga;
+        $denda = $denda_telat + $denda_kondisi;
+        }
+        
+        return view('peminjam.riwayat.detail', compact('peminjaman','denda'));
     }
 
     /**
@@ -70,6 +105,20 @@ class PeminjamanController extends Controller
             'status' => 'required|in:disetujui,pending,ditolak',
             'batas_waktu' => 'required',
             'catatan' => 'required|max:255', 
+        ]);
+
+        if ($validatedData['status'] == 'disetujui') {
+            $alat = $peminjaman->alat;
+            $alat->update([
+            'status' => 0,
+        ]);
+        };
+
+        Log::create([
+            'user_id' => Auth::id(),
+            'aksi' => 'Review',
+            'bagian' => 'Peminjaman',
+            'created_at' => now(),
         ]);
 
         $peminjaman->update($validatedData);

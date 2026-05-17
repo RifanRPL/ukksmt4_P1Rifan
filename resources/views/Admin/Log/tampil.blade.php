@@ -10,7 +10,6 @@
 
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>User</th>
                                 <th>Aksi</th>
                                 <th>Bagian</th>
@@ -18,13 +17,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($logs as $log)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Gusti</td>
-                                <td>Create</td>
-                                <td>User</td>
-                                <td>Jam segitulah</td>
+                                <td>{{ $log->user->nama }}</td>
+                                <td>{{ $log->aksi }}</td>
+                                <td>{{ $log->bagian }}</td>
+                                <td>{{ $log->created_at }}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

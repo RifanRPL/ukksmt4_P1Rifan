@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('peminjam_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
             $table->foreignId('alat_id')->constrained()->onUpdate('cascade')->onDelete('restrict');
-            $table->foreignId('petugas_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict')->nullable();
+            $table->foreignId('petugas_id')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('restrict');
             $table->enum('status',['disetujui', 'pending', 'ditolak']);
             $table->date('tanggal_peminjaman');
             $table->date('batas_waktu')->nullable();

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->text('deskripsi');
             $table->tinyInteger('status');
+            $table->enum('kondisi',['rusak_ringan', 'rusak_sedang', 'rusak_berat', 'baik', 'hilang']);
             $table->string('foto',255);
             $table->timestamps();
         });

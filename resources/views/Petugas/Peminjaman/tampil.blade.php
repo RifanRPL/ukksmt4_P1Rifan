@@ -25,7 +25,13 @@
                                 <th scope="row">{{ $peminjaman->id }}</th>
                                 <td>{{ $peminjaman->peminjam->nama }}</td>
                                 <td>{{ $peminjaman->alat->nama }}</td>
-                                <td> @if ($peminjaman->pengembalian)
+                                <td> @if ($peminjaman->pengembalian?->pelanggaran != null)
+                                        @if ($peminjaman->pengembalian->pelanggaran->status == 0)
+                                        <span class="badge bg-danger font-size-12 ms-2">Pelanggaran</span>
+                                        @else
+                                        <span class="badge bg-success font-size-12 ms-2">Lunas</span>
+                                        @endif
+                                    @elseif ($peminjaman->pengembalian)
                                     <span class="badge bg-success font-size-12 ms-2">Dikembalikan</span>
                                     @elseif ($peminjaman->status == 'pending')
                                     <span class="badge bg-secondary font-size-12 ms-2">Pending</span>

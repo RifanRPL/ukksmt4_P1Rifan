@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
 
-    
-<!-- Mirrored from themesdesign.in/webadmin/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 04 Mar 2026 22:44:14 GMT -->
 <head>
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,7 +37,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="{{route('admin.index')}}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                                 </span>
@@ -48,7 +46,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="{{route('admin.index')}}" class="logo logo-light">
                                 <span class="logo-lg">
                                     <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
                                 </span>
@@ -125,7 +123,7 @@
 
                 <!-- LOGO -->
                 <div class="navbar-brand-box">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="{{route('admin.index')}}" class="logo logo-dark">
                         <span class="logo-sm">
                             <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                         </span>
@@ -134,7 +132,7 @@
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
+                    <a href="{{route('admin.index')}}" class="logo logo-light">
                         <span class="logo-lg">
                             <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="30">
                         </span>
@@ -155,7 +153,7 @@
                         <!-- Left Menu Start -->
                         <ul class="metismenu list-unstyled" id="side-menu">
                            <li>
-                                <a href="">
+                                <a href="{{ route('admin.index') }}">
                                     <i class="bx bx-home-alt icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-dashboard">Dashboard</span>
                                 </a>
@@ -185,6 +183,27 @@
                             </li>
 
                             <li>
+                                <a href="{{ route('peminjamanAdmin.index') }}">
+                                    <i class="bx bx-archive-out icon icon nav-icon"></i>
+                                    <span class="menu-item" data-key="t-calendar">Peminjaman</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('pengembalianAdmin.index') }}">
+                                    <i class="bx bx-package icon nav-icon"></i>
+                                    <span class="menu-item" data-key="t-todo">Pengembalian</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('pelanggaranAdmin.index') }}">
+                                    <i class="bx bx bx-x-circle icon nav-icon"></i>
+                                    <span class="menu-item" data-key="t-filemanager">Pelanggaran</span>
+                                </a>
+                            </li>
+
+                            <li>
                                 <a href="{{ route('log.index') }}">
                                     <i class="bx bx-file-find icon nav-icon"></i>
                                     <span class="menu-item" data-key="t-horizontal">Log Aktifitas</span>
@@ -202,7 +221,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="{{route('admin.index')}}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="" height="26">
                                 </span>
@@ -211,7 +230,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="{{route('admin.index')}}" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/images/logo-light-sm.png') }}" alt="" height="26">
                                 </span>
@@ -410,7 +429,7 @@
                                             <span data-key="t-dashboards">Dashboards</span> <div class="arrow-down"></div>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
-                                            <a href="index.html"  class="dropdown-item" data-key="t-ecommerce">Ecommerce</a>
+                                            <a href="{{route('admin.index')}}"  class="dropdown-item" data-key="t-ecommerce">Ecommerce</a>
                                             <a href="dashboard-sales.html"  class="dropdown-item" data-key="t-sales">Sales</a>
                                         </div>
                                     </li>
