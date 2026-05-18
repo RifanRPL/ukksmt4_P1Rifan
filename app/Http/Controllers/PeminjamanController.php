@@ -57,7 +57,7 @@ class PeminjamanController extends Controller
 
         Peminjaman::create($validatedData);
 
-        return redirect()->route('alat.list');
+        return redirect()->route('alat.list')->with('success', 'Pengajuan berhasil ditambahkan!');;
     }
 
     /**

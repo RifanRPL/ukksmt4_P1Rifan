@@ -46,7 +46,7 @@ class AlatController extends Controller
             'deskripsi' => 'required|max:255',
             'kondisi' => 'required|in:rusak_ringan,rusak_sedang,rusak_berat,baik,hilang',
             'status' => 'required',
-            'foto' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
         
         if ($request->hasFile('foto')) {

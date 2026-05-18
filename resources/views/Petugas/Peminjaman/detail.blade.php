@@ -23,7 +23,7 @@
                         <img src="{{ asset('assets/images/logo-dark-sm.png') }}" alt="logo" height="34"/>
                     </div>
                     <div class="text-muted">
-                        <p class="mb-1">3184 Spruce Drive Pittsburgh, PA 15201</p>
+                        <p class="mb-1">SMK MVP ARS INTERNASIONAL</p>
                         <p class="mb-1"><i class="mdi mdi-email-outline me-1"></i> xyz@987.com</p>
                         <p><i class="mdi mdi-phone-outline me-1"></i> 012-345-6789</p>
                     </div>
